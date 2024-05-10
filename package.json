@@ -1,0 +1,49 @@
+{
+  "name": "yap-event-updater",
+  "version": "0.0.14",
+  "description": "Event Updater microservice for nodejs projects",
+  "main": ".src/app.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:yapsody/yap-event-updater.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yapsody/yap-event-updater/issues"
+  },
+  "private": true,
+  "scripts": {
+    "start": "node ./src/app.js",
+    "dev": "nodemon ./src/app.js",
+    "build": "npm install --production --silent",
+    "test": "nyc --reporter=lcovonly --report-dir=reports mocha -t 20000 ./test/* --exit",
+    "lint": "eslint ./src",
+    "lintfix": "eslint ./src --fix"
+  },
+  "dependencies": {
+    
+    "axios": "^1.6.2",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "dayjs": "^1.11.10",
+    "dd-trace": "^3.47.0",
+    "express": "^4.18.2",
+    "helmet": "^5.1.1",
+    "joi": "^17.7.0",
+    "mysql2": "^3.9.6",
+    "sequelize": "^6.29.0",
+    "sharp": "^0.32.3",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "@types/chai-http": "^4.2.0",
+    
+    "dotenv": "^16.0.3",
+    "eslint": "^8.28.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    
+    "nodemon": "^3.0.3",
+    "nyc": "^15.1.0"
+  
+  }
+}

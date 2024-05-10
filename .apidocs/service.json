@@ -1,0 +1,11 @@
+{
+    "name": "Event Updater",
+    "summary": "This service for updating Event schema",
+    "details": "This project is handle the incoming event updating, where it will first consume message from SQS and validate the event schema. after validating the event schema will stored in database.",
+    "subscribes": [
+      "RequestUpdateEventSchema"
+    ],
+    "publishes": [
+      "CompletedUpdateEventSchema"
+    ]
+}

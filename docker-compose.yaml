@@ -1,0 +1,46 @@
+# docker-compose.yml
+version: "2.4"
+
+volumes:
+  db_data:
+
+services:
+  mysql:
+    container_name: event_updater_mysql
+    build:
+      context: ./db/
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - '3306:3306'
+    volumes:
+      - db_data:/var/lib/mysql
+
+  event_updater_serevice:
+    container_name: event_updater_serevice
+    depends_on:
+      mysql:
+        condition: service_healthy
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+      args:
+        - NPM_TOKEN=$NPM_TOKEN
+    ports:
+      - 8175:8175
+    environment:
+      - ENVIRONMENT=yap-local
+      - MICROSERVICE_NAME=Event-Updater
+      - MICROSERVICE_TYPE=com.yapsody.event-updater
+      - MICROSERVICE_IP=0.0.0.0
+      - APP_HOST=0.0.0.0
+      - APP_PORT=8175
+      - SWAGGER_PORT=8175
+      - MYSQL_HOST=mysql
+      - MYSQL_USERNAME=user
+      - MYSQL_PASSWORD=secret
+      - MYSQL_DB_NAME=event_discovery
+    volumes:
+      - .:/app:delegated
+      - ./:/home/node/app
